@@ -13,10 +13,26 @@ spec:
     metadata:
       labels:
         app: drink
-    spec:
-      containers:
-        - name: drink
-          image: username/drink:latest
+		spec:
+		  containers:
+		  - name: $_PROJECT_NAME
+		    env:
+		    - name: MARIADB_DATABASE
+		      valueFrom:
+					  configMapKeyRef:
+					    name: mariadb
+					    key: database
+		    - name: MARIADB_USERNAME
+		      valueFrom:
+					  secretKeyRef:
+					    name: mariadb
+					    key: username
+		    - name: MARIADB_PASSWORD
+		      valueFrom:
+					  secretKeyRef:
+					    name: mariadb
+					    key: password
+          image: beatific/drink:v1
           ports:
             - containerPort: 8080
           readinessProbe:
