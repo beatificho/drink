@@ -79,16 +79,16 @@ phases:
                       configMapKeyRef:
                         name: mariadb
                         key: database
-                - name: MARIADB_USERNAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: mariadb
-                      key: username
-                - name: MARIADB_PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: mariadb
-                      key: password
+                  - name: MARIADB_USERNAME
+                    valueFrom:
+                      secretKeyRef:
+                        name: mariadb
+                        key: username
+                  - name: MARIADB_PASSWORD
+                    valueFrom:
+                      secretKeyRef:
+                        name: mariadb
+                        key: password
                   image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$_PROJECT_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
                   ports:
                     - containerPort: 8080
